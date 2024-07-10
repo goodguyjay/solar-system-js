@@ -24,6 +24,7 @@ function Sun(): JSX.Element {
     );
 }
 
+// @ts-ignore
 function Planet({ planet: {color, xRadius, zRadius, size, speed, offset} }): JSX.Element {
     const planetRef = React.useRef();
 
@@ -31,7 +32,9 @@ function Planet({ planet: {color, xRadius, zRadius, size, speed, offset} }): JSX
         const time = clock.getElapsedTime() * speed + offset;
         const x = xRadius * Math.sin(time);
         const z = zRadius * Math.cos(time);
+        // @ts-ignore
         planetRef.current.position.x = x;
+        // @ts-ignore
         planetRef.current.position.z = z;
     });
 
@@ -81,7 +84,7 @@ const randomInt = (a: number, b: number) => Math.floor(random(a, b));
 const randomColor = (): string =>
     `rgb(${randomInt(80, 50)}, ${randomInt(80, 50)}, ${randomInt(80, 50)})`;
 
-const planetData: { id: number; color: string; xRadius: number; zRadius: number; size: number; }[] = [];
+const planetData: { id: number; color: string; xRadius: number; zRadius: number; size: number; speed: number, offset: number}[] = [];
 const totalPlanets: number = 6;
 
 for (let i = 0; i < totalPlanets; i++) {
